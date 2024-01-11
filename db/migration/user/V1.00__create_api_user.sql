@@ -1,0 +1,1 @@
+CREATE USER 'api_user'@'%' IDENTIFIED BY '${apiUserPassword}';

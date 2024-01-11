@@ -1,0 +1,24 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        // ライセンスの関係でFlywayがMySQLドライバを含まなくなったので設定が必要
+        classpath 'org.flywaydb:flyway-mysql:10.4.1'
+        classpath 'mysql:mysql-connector-java:8.0.27'
+    }
+}
+
+plugins {
+    id 'java'
+    id "org.flywaydb.flyway" version "10.4.1"
+}
+
+ext {
+    configFileName = project.hasProperty('nonLocal') ? 'flyway.properties' : 'local.properties'
+}
+
+flyway {
+    configFiles = ["db/config/${configFileName}"]
+}
+
